@@ -13,6 +13,10 @@ def open_chatgpt_and_authorize():
     try:
         driver.get("https://chat.openai.com")
 
+        send_button = WebDriverWait(driver, 20).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-testid='login-button']")))
+        send_button.click()
+
         email_input = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, "input#email-input")))
 
         # Ввод email с задержкой
@@ -76,7 +80,7 @@ def open_chatgpt_and_authorize():
             send_button = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-testid='send-button']")))
             send_button.click()
 
-            time.sleep(10)
+            time.sleep(15)
 
             response_message = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR,"div[data-message-author-role='assistant'] div.markdown.prose.w-full.break-words.dark\\:prose-invert.light")))
 
